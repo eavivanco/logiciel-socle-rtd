@@ -23,7 +23,7 @@ def processor(xls, client):
 
 
 def mask(pre_df):
-    clmns = ["Monto", "Descripcion1", "Descripcion2", "Detalle", "Fecha", "Numero", "Sucursal1", "Sucursal2", "Cargo/Abono"]
+    clmns = ["Monto", "Descripcion1", "Descripcion2", "Detalle", "Fecha", "Numero", "Sucursal1", "Sucursal2", "Cargo/Abono", "test"]
     pre_df.columns = clmns
     return pre_df
 
@@ -35,29 +35,34 @@ def months_list(xls):
     return months
 
 def cleaner(pre_df):
-    clmns = ["Monto","Descripcion1", "Descripcion2", "Detalle", "Fecha", "Numero", "Sucursal1", "Sucursal2", "Cargo/Abono"]
+    clmns = ["Monto","Descripcion1", "Descripcion2", "Detalle", "Fecha", "Numero", "Sucursal1", "Sucursal2", "Cargo/Abono", "test"]
     pre_df.columns = clmns
 
     index = pre_df.index
     condition = pre_df["Monto"] == "MONTO"
     index = index[condition] 
+    if index != 0:
+        df_filt = pre_df.iloc[index[0]+1:index[1]-1]
+        for i in range(index[0]+1, index[1]-1):
+            df_filt["Descripcion1"][i] = df_filt["Descripcion1"][i].replace(' ','').replace('.','').replace('-','').replace('°','')
+            df_filt["Descripcion1"][i] = df_filt["Descripcion1"][i].lower()
+            df_filt["Detalle"][i] = "na"
+    else :
+        df_filt = pre_df
 
-    df_filt = pre_df.iloc[index[0]+1:index[1]-1]
-    for i in range(index[0]+1, index[1]-1):
-        df_filt["Descripcion1"][i] = df_filt["Descripcion1"][i].replace(' ','').replace('.','').replace('-','').replace('°','')
-        df_filt["Descripcion1"][i] = df_filt["Descripcion1"][i].lower()
-        df_filt["Detalle"][i] = "na"
     return df_filt, index
 
 def filler(df_filt, index):
-    for i in range(index[0]+1, index[1]-1):
-        ingresos(df_filt, i)
-        egresos(df_filt, i)  
+    if index != 0 :
+        for i in range(index[0]+1, index[1]-1):
+            ingresos(df_filt, i)
+            egresos(df_filt, i)  
     return df_filt
 
 def output(df, df_filled, index):
-    for i in range(index[0]+1, index[1]-1):
-        df["Detalle"][i] = df_filled["Detalle"][i]
+    if index != 0 :
+        for i in range(index[0]+1, index[1]-1):
+            df["Detalle"][i] = df_filled["Detalle"][i]
     return df
 
 def egresos(df_filt, pos):
