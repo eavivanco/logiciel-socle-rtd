@@ -2,10 +2,6 @@
 
 Whit every commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
-
-
-```markdown
 # Accounting files filler software
 
 [Read the docs link](https://readthedocs.org/projects/eavivanco-logiciel-socle-rtd/)
@@ -81,7 +77,7 @@ output :
 #### filler(df_filt, index)
 
 It receives the "clean" data frame and the index from the cleaner and fills the information of interest. One of its components is the function ```egresos(df_filt, pos)``` which groups the different outcomes of the company, for 
-example, the function ```proveedores(df_filt, pos)``` (suppliers) which contains the list :
+example, the function proveedores(df_filt, pos) (suppliers) which contains the list :
 
 - proveedores = \["mantencion", "transf", "entel", "servicios", "77030755", "77030117"\]
 
@@ -90,4 +86,3 @@ with key words that links the bank description to the key word "Pago Proveedores
 #### output(df_mask, df_filled, index)
 
 It receives the "filled" data frame from the filler, with the index from the cleaner and a mask (original data frame) in order to create a final .csv/.xlsx file in /src/out/yourfilledfile.csv
-```
