@@ -17,13 +17,13 @@ def processor(xls, client):
 
         # se crea el output
         i += 1
-        df_output.to_excel(f"{client}/{i}_{month}.xlsx", sheet_name=month)
+        df_output.to_excel(f"{month}.xlsx", sheet_name=month)
         #df_output.to_csv(f"{client}/{month}.csv")
     return None
 
 
 def mask(pre_df):
-    clmns = ["Monto","Descripcion1", "Descripcion2", "Detalle", "Fecha", "Numero", "Sucursal1", "Sucursal2", "Cargo/Abono"]
+    clmns = ["Monto", "Descripcion1", "Descripcion2", "Detalle", "Fecha", "Numero", "Sucursal1", "Sucursal2", "Cargo/Abono"]
     pre_df.columns = clmns
     return pre_df
 
