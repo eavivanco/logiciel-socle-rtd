@@ -147,4 +147,7 @@ def previred(df_filt, pos):
         df_filt["Detalle"][pos] = "Pago Cotizaciones"
     return df_filt
 
+def test_placeholder():
+    pass
+
     
