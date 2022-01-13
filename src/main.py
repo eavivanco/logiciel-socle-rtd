@@ -6,7 +6,7 @@ client = "out"
 file_name = 'Noviembre.xlsx'
 
 # doc
-xls = pd.ExcelFile(f'in/{file_name}')
+xls = pd.ExcelFile(f'{file_name}')
 
 # debug
 #df_mask = pd.read_excel(xls, "Enero")
